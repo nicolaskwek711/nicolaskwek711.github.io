@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Projects — Nicolas Kwek</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: 'Inter', -apple-system, sans-serif;
+            background: #fff;
+            color: #000;
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 4rem;
+        }
+
+        nav .container,
+        footer .container { max-width: 1600px; }
+
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(255,255,255,0.95);
+            backdrop-filter: blur(20px);
+            z-index: 1000;
+            padding: 1.5rem 0;
+            border-bottom: 1px solid rgba(0,0,0,0.1);
+        }
+
+        nav .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo img { height: 50px; transition: transform 0.3s; }
+        .logo:hover img { transform: scale(1.05); }
+
+        .nav-actions { display: flex; gap: 0.75rem; align-items: center; }
+
+        .back-btn {
+            position: relative;
+            padding: 0.75rem 1.6rem;
+            background: rgba(255,255,255,0.05);
+            color: #000;
+            text-decoration: none;
+            font-family: inherit;
+            font-size: 0.9rem;
+            font-weight: 600;
+            text-transform: lowercase;
+            letter-spacing: 1px;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            backdrop-filter: blur(6px) url(#liquid-glass);
+            -webkit-backdrop-filter: blur(6px);
+            box-shadow:
+                0 0 6px rgba(0,0,0,0.03),
+                0 2px 6px rgba(0,0,0,0.08),
+                inset 3px 3px 0.5px -3px rgba(0,0,0,0.9),
+                inset -3px -3px 0.5px -3px rgba(0,0,0,0.85),
+                inset 1px 1px 1px -0.5px rgba(0,0,0,0.6),
+                inset -1px -1px 1px -0.5px rgba(0,0,0,0.6),
+                inset 0 0 6px 6px rgba(0,0,0,0.12),
+                inset 0 0 2px 2px rgba(0,0,0,0.06),
+                0 0 12px rgba(255,255,255,0.15);
+            transition: transform 0.3s ease;
+        }
+        .back-btn:hover { transform: scale(1.05); }
+
+        .hero {
+            padding: 10rem 0 3rem;
+        }
+
+        .section-label {
+            font-size: 0.75rem;
+            color: #999;
+            text-transform: lowercase;
+            letter-spacing: 3px;
+            margin-bottom: 1.5rem;
+            font-weight: 600;
+        }
+
+        .section-title {
+            font-size: clamp(4rem, 11vw, 9rem);
+            font-weight: 900;
+            line-height: 0.9;
+            letter-spacing: -0.03em;
+            margin-bottom: 1.5rem;
+            text-transform: lowercase;
+        }
+
+        .section-desc {
+            font-size: 1.1rem;
+            color: #666;
+            max-width: 560px;
+        }
+
+        /* Project entries */
+        .projects {
+            padding-bottom: 6rem;
+        }
+
+        .project {
+            padding: 4rem 0;
+            border-top: 1px solid rgba(0,0,0,0.1);
+        }
+        .project:first-child { border-top: none; padding-top: 1rem; }
+
+        .project-header {
+            display: flex;
+            align-items: baseline;
+            gap: 1rem;
+            margin-bottom: 0.75rem;
+            flex-wrap: wrap;
+        }
+
+        .project-number {
+            font-size: 0.85rem;
+            color: #999;
+            font-weight: 600;
+            letter-spacing: 2px;
+        }
+
+        .project-type {
+            font-size: 0.75rem;
+            color: #999;
+            text-transform: lowercase;
+            letter-spacing: 2px;
+            font-weight: 600;
+            padding: 0.3rem 0.8rem;
+            border: 1px solid rgba(0,0,0,0.15);
+            border-radius: 50px;
+            margin-left: auto;
+        }
+
+        .role-block {
+            margin-bottom: 1.25rem;
+        }
+
+        .role-label {
+            font-size: 0.7rem;
+            color: #999;
+            text-transform: lowercase;
+            letter-spacing: 2px;
+            font-weight: 600;
+            margin-bottom: 0.6rem;
+        }
+
+        .role-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .role-tag {
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: lowercase;
+            letter-spacing: 1px;
+            padding: 0.3rem 0.85rem;
+            background: #000;
+            color: #fff;
+            border-radius: 50px;
+        }
+
+        .project-title {
+            font-size: clamp(2.25rem, 5vw, 3.75rem);
+            font-weight: 900;
+            line-height: 1;
+            letter-spacing: -0.03em;
+            margin-bottom: 1rem;
+            text-transform: lowercase;
+        }
+
+        .project-tagline {
+            font-size: 1rem;
+            color: #888;
+            margin-bottom: 2rem;
+            font-style: italic;
+        }
+
+        .project-video {
+            width: 100%;
+            border-radius: 12px;
+            overflow: hidden;
+            background: #000;
+            aspect-ratio: 16 / 9;
+            margin-bottom: 2rem;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.08);
+        }
+
+        .project-video.vertical {
+            aspect-ratio: 9 / 16;
+            max-width: 340px;
+        }
+
+        .project-video iframe {
+            width: 100%;
+            height: 100%;
+            display: block;
+            border: none;
+        }
+
+        .project-body {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: start;
+        }
+
+        .synopsis-block .synopsis-label {
+            font-size: 0.7rem;
+            color: #999;
+            text-transform: lowercase;
+            letter-spacing: 2px;
+            font-weight: 600;
+            margin-bottom: 0.75rem;
+        }
+
+        .synopsis-text {
+            font-size: 1.05rem;
+            color: #333;
+            line-height: 1.7;
+        }
+
+        .synopsis-text:empty::before,
+        .synopsis-text.placeholder {
+            content: '[ add synopsis here ]';
+            color: #ccc;
+            font-style: italic;
+        }
+        .synopsis-text.placeholder::before {
+            content: '[ add synopsis here ]';
+        }
+
+        .featured {
+            background: #fafafa;
+            border: 1px solid rgba(0,0,0,0.08);
+            border-radius: 12px;
+            padding: 1.5rem 1.75rem;
+        }
+
+        .featured-label {
+            font-size: 0.7rem;
+            color: #999;
+            text-transform: lowercase;
+            letter-spacing: 2px;
+            font-weight: 700;
+            margin-bottom: 0.75rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .featured-label::before {
+            content: '★';
+            color: #d4a017;
+            font-size: 1rem;
+        }
+
+        .featured-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .featured-list li {
+            font-size: 0.95rem;
+            color: #333;
+            line-height: 1.5;
+            padding: 0.5rem 0;
+            border-bottom: 1px solid rgba(0,0,0,0.06);
+        }
+        .featured-list li:last-child { border-bottom: none; }
+        .featured-list li strong { color: #000; }
+
+        footer {
+            padding: 4rem 0 3rem;
+            border-top: 1px solid rgba(0,0,0,0.1);
+        }
+
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .footer-title {
+            font-size: clamp(1.75rem, 3vw, 2.5rem);
+            font-weight: 900;
+            line-height: 1;
+            text-transform: lowercase;
+            letter-spacing: -0.03em;
+        }
+
+        .footer-text { color: #999; font-size: 0.9rem; }
+
+        @media (max-width: 520px) {
+            .nav-actions { gap: 0.4rem; }
+            .back-btn { padding: 0.6rem 1rem; font-size: 0.78rem; letter-spacing: 0.5px; }
+            nav { padding: 1rem 0; }
+            .logo img { height: 36px; }
+            .project-header { gap: 0.5rem; }
+            .project-type { margin-left: 0; }
+        }
+
+        @media (max-width: 768px) {
+            .container { padding: 0 1.5rem; }
+            .hero { padding: 7rem 0 2rem; }
+            .project { padding: 3rem 0; }
+            .project-body { grid-template-columns: 1fr; gap: 2rem; }
+            .project-type { margin-left: 0; }
+            .footer-content { flex-direction: column; gap: 1.5rem; text-align: center; }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="container">
+            <a href="index.html" class="logo">
+                <img src="images/NK Black Logo (No BG).png" alt="NK">
+            </a>
+            <div class="nav-actions">
+                <a href="portfolio.html" class="back-btn secondary">← portfolio</a>
+                <a href="index.html" class="back-btn">← home</a>
+            </div>
+        </div>
+    </nav>
+
+    <section class="hero">
+        <div class="container">
+            <div class="section-label">selected work</div>
+            <h1 class="section-title">projects</h1>
+            <p class="section-desc">four short films across documentary, fiction, infotainment, and comedy — each one a different kind of story to tell.</p>
+        </div>
+    </section>
+
+    <div class="container">
+        <div class="projects">
+
+            <!-- Behind the Facade -->
+            <article class="project">
+                <div class="project-header">
+                    <span class="project-number">01</span>
+                    <span class="project-type">documentary film</span>
+                </div>
+                <h2 class="project-title">behind the facade</h2>
+                <p class="project-tagline">a documentary produced for my Introduction to Documentary module.</p>
+
+                <div class="project-video">
+                    <iframe src="https://www.youtube.com/embed/uumnte2iB6g" allowfullscreen allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"></iframe>
+                </div>
+
+                <div class="project-body">
+                    <div class="synopsis-block">
+                        <div class="synopsis-label">synopsis</div>
+                        <p class="synopsis-text">In the heart of Joo Chiat lies a piece of Singapore's culture that can never be replaced — the Peranakan houses of Koon Seng Road. But nobody knows who, or what, is behind the facade. In <em>Behind the Facade</em>, we get to know the history of these structures as told by long-time owner of No.8 Koon Seng Road, Kwek Buck Chua, as he walks us through what's really behind the facade. We get exclusive access into the doors of No.8 Koon Seng Road and get intimate with the rich Peranakan culture it holds within its walls.</p>
+                    </div>
+
+                    <div>
+                        <div class="role-block">
+                            <div class="role-label">my role</div>
+                            <div class="role-tags">
+                                <span class="role-tag">editor</span>
+                                <span class="role-tag">colorist</span>
+                                <span class="role-tag">co-producer</span>
+                            </div>
+                        </div>
+                        <div class="featured">
+                            <div class="featured-label">featured</div>
+                            <ul class="featured-list">
+                                <li>Showcased at <strong>Bras Basah MRT</strong> as part of <strong>SMRT</strong>'s <strong>SG60 · 60 Stories: Unearthing Stories of Us</strong>.</li>
+                                <li>Screened at <strong>BroadcastAsia</strong>, <strong>Asia Tech X Singapore 2026</strong>.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </article>
+
+            <!-- #DPG -->
+            <article class="project">
+                <div class="project-header">
+                    <span class="project-number">02</span>
+                    <span class="project-type">short film</span>
+                </div>
+                <h2 class="project-title">#dpg</h2>
+                <p class="project-tagline">a meet-cute short film produced for my Video Production for Narratives module.</p>
+
+                <div class="project-video">
+                    <iframe src="https://www.youtube.com/embed/F6umoAGKBSw" allowfullscreen allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"></iframe>
+                </div>
+
+                <div class="project-body">
+                    <div class="synopsis-block">
+                        <div class="synopsis-label">synopsis</div>
+                        <p class="synopsis-text">A post-it doodle found on a campus bridge is misread and quickly spreads online, leaving Brandon saddled with an embarrassing nickname he never asked for. Nicole, who caused the image to go viral, soon realises her mistake and is forced to confront the harm of a careless post. As she searches for ways to make amends through small, quiet gestures, their paths cross again at the bridge — where a simple drawing offers the chance to start over.</p>
+                    </div>
+                    <div class="role-block">
+                        <div class="role-label">my role</div>
+                        <div class="role-tags">
+                            <span class="role-tag">director of photography</span>
+                            <span class="role-tag">editor</span>
+                        </div>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Ctrl + Alt + Amon -->
+            <article class="project">
+                <div class="project-header">
+                    <span class="project-number">03</span>
+                    <span class="project-type">reality</span>
+                </div>
+                <h2 class="project-title">ctrl + alt + amon</h2>
+                <p class="project-tagline">a reality short film produced for my Entertainment Content Production module.</p>
+
+                <div class="project-video">
+                    <iframe src="https://www.youtube.com/embed/fszCIZgaU_A" allowfullscreen allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"></iframe>
+                </div>
+
+                <div class="project-body">
+                    <div class="synopsis-block">
+                        <div class="synopsis-label">synopsis</div>
+                        <p class="synopsis-text">Chosen to lead Singapore Polytechnic's junior team into the legacy-heavy RoboRoarZ competition, first-year engineer Amon balances sleepless nights, schoolwork, and rising pressure as technical setbacks test his limits. When his team falls short on competition day, Amon is forced to confront what engineering — and success — truly mean to him.</p>
+                    </div>
+                    <div class="role-block">
+                        <div class="role-label">my role</div>
+                        <div class="role-tags">
+                            <span class="role-tag">director of photography</span>
+                            <span class="role-tag">co-editor</span>
+                        </div>
+                    </div>
+                </div>
+            </article>
+
+            <!-- The Last Cream Cheese -->
+            <article class="project">
+                <div class="project-header">
+                    <span class="project-number">04</span>
+                    <span class="project-type">microdrama</span>
+                </div>
+                <h2 class="project-title">the last cream cheese</h2>
+                <p class="project-tagline">a microdrama produced for the SP × FairPrice Group Content Creation Hackathon 2026.</p>
+
+                <div class="project-video vertical">
+                    <iframe src="https://www.youtube.com/embed/wmAEnHBAT-g" allowfullscreen allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"></iframe>
+                </div>
+
+                <div class="project-body">
+                    <div class="synopsis-block">
+                        <div class="synopsis-label">synopsis</div>
+                        <p class="synopsis-text">A simple grocery run at FairPrice spirals into chaos when two customers argue over the last cream cheese, only to realise they're connected in an unexpected way.</p>
+                    </div>
+
+                    <div>
+                        <div class="role-block">
+                            <div class="role-label">my role</div>
+                            <div class="role-tags">
+                                <span class="role-tag">actor</span>
+                            </div>
+                        </div>
+                        <div class="featured">
+                            <div class="featured-label">featured</div>
+                            <ul class="featured-list">
+                                <li>Won <strong>First Prize</strong> at the <strong>SP × FairPrice Group Content Creation Hackathon 2026</strong>.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </article>
+
+        </div>
+    </div>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-title">always creating.</div>
+                <div class="footer-text">&copy; 2024 Nicolas Kwek · Singapore 🇸🇬</div>
+            </div>
+        </div>
+    </footer>
+    <svg style="position:absolute;width:0;height:0;overflow:hidden" aria-hidden="true">
+        <defs>
+            <filter id="liquid-glass" x="0%" y="0%" width="100%" height="100%" color-interpolation-filters="sRGB">
+                <feTurbulence type="fractalNoise" baseFrequency="0.05 0.05" numOctaves="1" seed="1" result="turbulence"/>
+                <feGaussianBlur in="turbulence" stdDeviation="2" result="blurredNoise"/>
+                <feDisplacementMap in="SourceGraphic" in2="blurredNoise" scale="70" xChannelSelector="R" yChannelSelector="B" result="displaced"/>
+                <feGaussianBlur in="displaced" stdDeviation="4" result="finalBlur"/>
+                <feComposite in="finalBlur" in2="finalBlur" operator="over"/>
+            </filter>
+        </defs>
+    </svg>
+</body>
+</html>

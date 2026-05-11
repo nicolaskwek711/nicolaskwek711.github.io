@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Portfolio - Nicolas Kwek</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: 'Inter', -apple-system, sans-serif;
+            background: #fff;
+            color: #000;
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 4rem;
+        }
+
+        nav .container,
+        footer .container { max-width: 1600px; }
+
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(255,255,255,0.95);
+            backdrop-filter: blur(20px);
+            z-index: 1000;
+            padding: 1.5rem 0;
+            border-bottom: 1px solid rgba(0,0,0,0.1);
+        }
+
+        nav .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo img { height: 50px; transition: transform 0.3s; }
+        .logo:hover img { transform: scale(1.05); }
+
+        .back-btn {
+            position: relative;
+            padding: 0.75rem 2rem;
+            background: rgba(255,255,255,0.05);
+            color: #000;
+            text-decoration: none;
+            font-family: inherit;
+            font-size: 0.9rem;
+            font-weight: 600;
+            text-transform: lowercase;
+            letter-spacing: 1px;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            backdrop-filter: blur(6px) url(#liquid-glass);
+            -webkit-backdrop-filter: blur(6px);
+            box-shadow:
+                0 0 6px rgba(0,0,0,0.03),
+                0 2px 6px rgba(0,0,0,0.08),
+                inset 3px 3px 0.5px -3px rgba(0,0,0,0.9),
+                inset -3px -3px 0.5px -3px rgba(0,0,0,0.85),
+                inset 1px 1px 1px -0.5px rgba(0,0,0,0.6),
+                inset -1px -1px 1px -0.5px rgba(0,0,0,0.6),
+                inset 0 0 6px 6px rgba(0,0,0,0.12),
+                inset 0 0 2px 2px rgba(0,0,0,0.06),
+                0 0 12px rgba(255,255,255,0.15);
+            transition: transform 0.3s ease;
+        }
+        .back-btn:hover { transform: scale(1.05); }
+
+        .hero {
+            padding: 10rem 0 2rem;
+            text-align: center;
+        }
+
+        .section-label {
+            font-size: 0.75rem;
+            color: #999;
+            text-transform: lowercase;
+            letter-spacing: 3px;
+            margin-bottom: 1.5rem;
+            font-weight: 600;
+        }
+
+        .section-title {
+            font-size: clamp(3.5rem, 9vw, 7rem);
+            font-weight: 900;
+            line-height: 0.95;
+            letter-spacing: -0.03em;
+            margin-bottom: 1.5rem;
+            text-transform: lowercase;
+        }
+
+        .section-desc {
+            font-size: 1.1rem;
+            color: #666;
+            max-width: 640px;
+            margin: 0 auto;
+        }
+
+        .gallery-wrap {
+            width: 100%;
+            margin: 3rem 0 6rem;
+            position: relative;
+        }
+
+        .carousel {
+            display: flex;
+            gap: 1.5rem;
+            overflow-x: auto;
+            overflow-y: hidden;
+            -webkit-overflow-scrolling: touch;
+            padding: 0 max(2rem, calc(50vw - 280px)) 1.5rem;
+            cursor: grab;
+            scrollbar-width: none;
+            position: relative;
+        }
+        .carousel::-webkit-scrollbar { display: none; }
+        .carousel.dragging { cursor: grabbing; }
+
+        .card {
+            flex: 0 0 auto;
+            width: clamp(220px, 32vw, 360px);
+            text-decoration: none;
+            color: #000;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            transition: transform 0.4s ease;
+        }
+        .card:hover { transform: translateY(-6px); }
+
+        .card-img {
+            width: 100%;
+            aspect-ratio: 4 / 5;
+            overflow: hidden;
+            border-radius: 12px;
+            background: #f3f3f3;
+        }
+
+        .card-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
+            display: block;
+            transition: transform 0.6s ease;
+            pointer-events: none;
+            user-select: none;
+        }
+
+        /* Per-image crop offset tweaks */
+        .card-img img[src*="Sports/Image 6"],
+        .card-img img[src*="Landscape Photography/Image 2"] {
+            object-position: center 25%;
+        }
+        .card:hover .card-img img { transform: scale(1.05); }
+
+        .card-label {
+            text-align: center;
+            font-size: 1.5rem;
+            font-weight: 700;
+            text-transform: lowercase;
+            letter-spacing: -0.01em;
+        }
+
+        footer {
+            padding: 4rem 0 3rem;
+            border-top: 1px solid rgba(0,0,0,0.1);
+        }
+
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .footer-title {
+            font-size: clamp(1.75rem, 3vw, 2.5rem);
+            font-weight: 900;
+            line-height: 1;
+            text-transform: lowercase;
+            letter-spacing: -0.03em;
+        }
+
+        .footer-text { color: #999; font-size: 0.9rem; }
+
+        @media (max-width: 520px) {
+            .back-btn { padding: 0.6rem 1rem; font-size: 0.78rem; letter-spacing: 0.5px; }
+            nav { padding: 1rem 0; }
+            .logo img { height: 36px; }
+        }
+
+        @media (max-width: 768px) {
+            .container { padding: 0 1.5rem; }
+            .hero { padding: 7rem 0 1rem; }
+            .gallery-wrap { margin: 2rem 0 3rem; }
+            .carousel { gap: 1rem; padding: 0 1rem 1.5rem; }
+            .card { width: 75vw; }
+            .card-label { font-size: 1.25rem; }
+            .footer-content { flex-direction: column; gap: 1.5rem; text-align: center; }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="container">
+            <a href="index.html" class="logo">
+                <img src="images/NK Black Logo (No BG).png" alt="NK">
+            </a>
+            <a href="index.html" class="back-btn">← back home</a>
+        </div>
+    </nav>
+
+    <section class="hero">
+        <div class="container">
+            <div class="section-label">selected work</div>
+            <h1 class="section-title">my portfolio</h1>
+            <p class="section-desc">a curated journey through events, streets, landscapes and personal projects — drag, scroll or swipe to explore.</p>
+        </div>
+    </section>
+
+    <div class="gallery-wrap">
+        <div class="carousel" id="carousel">
+            <a class="card" href="events.html">
+                <div class="card-img"><img src="images/Event Photography/Sports/Image 6.jpg" alt="events"></div>
+                <div class="card-label">event photography</div>
+            </a>
+            <a class="card" href="street.html">
+                <div class="card-img"><img src="images/Street Photography/Image 1.jpg" alt="street"></div>
+                <div class="card-label">street photography</div>
+            </a>
+            <a class="card" href="landscape.html">
+                <div class="card-img"><img src="images/Landscape Photography/Image 1.jpg" alt="landscape"></div>
+                <div class="card-label">landscape photography</div>
+            </a>
+            <a class="card" href="projects.html">
+                <div class="card-img"><img src="images/Projects/Behind the Facade/Cover Image.jpg" alt="projects"></div>
+                <div class="card-label">videography</div>
+            </a>
+            <a class="card" href="events.html">
+                <div class="card-img"><img src="images/Event Photography/Concerts/Image 1.jpg" alt="events"></div>
+                <div class="card-label">event photography</div>
+            </a>
+            <a class="card" href="street.html">
+                <div class="card-img"><img src="images/Street Photography/Image 3.jpg" alt="street"></div>
+                <div class="card-label">street photography</div>
+            </a>
+            <a class="card" href="landscape.html">
+                <div class="card-img"><img src="images/Landscape Photography/Image 2.jpg" alt="landscape"></div>
+                <div class="card-label">landscape photography</div>
+            </a>
+            <a class="card" href="projects.html">
+                <div class="card-img"><img src="images/Projects/Ctrl + Alt + Amon/Cover Image.jpg" alt="projects"></div>
+                <div class="card-label">videography</div>
+            </a>
+        </div>
+    </div>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-title">always creating.</div>
+                <div class="footer-text">&copy; 2024 Nicolas Kwek · Singapore 🇸🇬</div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        const carousel = document.getElementById('carousel');
+        const originals = Array.from(carousel.children);
+        const n = originals.length;
+
+        // Build [Set A clones] [Set B originals] [Set C clones]
+        originals.slice().reverse().forEach(c => carousel.insertBefore(c.cloneNode(true), carousel.firstChild));
+        originals.forEach(c => carousel.appendChild(c.cloneNode(true)));
+
+        // Cache set width and Set B start — recalculated on init and resize
+        let sw = 0, setBStart = 0;
+        function measure() {
+            setBStart = carousel.children[n].offsetLeft;
+            sw        = carousel.children[2 * n].offsetLeft - setBStart;
+        }
+
+        // Double rAF: first rAF queues after paint, second fires after layout is ready
+        function initScroll() {
+            measure();
+            carousel.scrollLeft = setBStart;
+        }
+        requestAnimationFrame(() => requestAnimationFrame(initScroll));
+        window.addEventListener('resize', () => requestAnimationFrame(initScroll));
+
+        // Drag state — startScroll must stay in sync when we jump
+        let isDown = false, startX = 0, startScroll = 0, moved = 0;
+
+        // Infinite loop: jump ±sw when drifting outside Set B,
+        // and keep startScroll in sync so mid-drag jumps don't fight the next mousemove
+        carousel.addEventListener('scroll', () => {
+            if (carousel.scrollLeft < setBStart) {
+                carousel.scrollLeft += sw;
+                startScroll += sw;
+            } else if (carousel.scrollLeft >= setBStart + sw) {
+                carousel.scrollLeft -= sw;
+                startScroll -= sw;
+            }
+        }, { passive: true });
+
+        // Prevent browser's native image/link drag from stealing mouse events
+        carousel.addEventListener('dragstart', e => e.preventDefault());
+
+        // Mouse drag
+        carousel.addEventListener('mousedown', e => {
+            e.preventDefault(); // stops native drag on images & <a> elements
+            isDown = true; moved = 0;
+            startX = e.pageX;
+            startScroll = carousel.scrollLeft;
+            carousel.classList.add('dragging');
+        });
+        window.addEventListener('mousemove', e => {
+            if (!isDown) return;
+            const dx = e.pageX - startX;
+            moved = Math.max(moved, Math.abs(dx));
+            carousel.scrollLeft = startScroll - dx;
+        });
+        window.addEventListener('mouseup', () => {
+            if (!isDown) return;
+            isDown = false;
+            carousel.classList.remove('dragging');
+        });
+
+        // Block navigation if user dragged instead of clicked
+        carousel.addEventListener('click', e => {
+            if (moved > 6) e.preventDefault();
+        }, true);
+    </script>
+    <svg style="position:absolute;width:0;height:0;overflow:hidden" aria-hidden="true">
+        <defs>
+            <filter id="liquid-glass" x="0%" y="0%" width="100%" height="100%" color-interpolation-filters="sRGB">
+                <feTurbulence type="fractalNoise" baseFrequency="0.05 0.05" numOctaves="1" seed="1" result="turbulence"/>
+                <feGaussianBlur in="turbulence" stdDeviation="2" result="blurredNoise"/>
+                <feDisplacementMap in="SourceGraphic" in2="blurredNoise" scale="70" xChannelSelector="R" yChannelSelector="B" result="displaced"/>
+                <feGaussianBlur in="displaced" stdDeviation="4" result="finalBlur"/>
+                <feComposite in="finalBlur" in2="finalBlur" operator="over"/>
+            </filter>
+        </defs>
+    </svg>
+</body>
+</html>

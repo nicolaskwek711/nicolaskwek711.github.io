@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact - Nicolas Kwek</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: 'Inter', -apple-system, sans-serif;
+            background: #fff;
+            color: #000;
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 0 4rem;
+        }
+
+        nav .container,
+        footer .container { max-width: 1600px; }
+
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(255,255,255,0.95);
+            backdrop-filter: blur(20px);
+            z-index: 1000;
+            padding: 1.5rem 0;
+            border-bottom: 1px solid rgba(0,0,0,0.1);
+        }
+
+        nav .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo img { height: 50px; transition: transform 0.3s; }
+        .logo:hover img { transform: scale(1.05); }
+
+        .liquid-btn,
+        .back-btn,
+        .submit-btn {
+            position: relative;
+            background: rgba(255,255,255,0.05);
+            color: #000;
+            text-decoration: none;
+            font-family: inherit;
+            font-weight: 600;
+            text-transform: lowercase;
+            letter-spacing: 1px;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            backdrop-filter: blur(6px) url(#liquid-glass);
+            -webkit-backdrop-filter: blur(6px);
+            box-shadow:
+                0 0 6px rgba(0,0,0,0.03),
+                0 2px 6px rgba(0,0,0,0.08),
+                inset 3px 3px 0.5px -3px rgba(0,0,0,0.9),
+                inset -3px -3px 0.5px -3px rgba(0,0,0,0.85),
+                inset 1px 1px 1px -0.5px rgba(0,0,0,0.6),
+                inset -1px -1px 1px -0.5px rgba(0,0,0,0.6),
+                inset 0 0 6px 6px rgba(0,0,0,0.12),
+                inset 0 0 2px 2px rgba(0,0,0,0.06),
+                0 0 12px rgba(255,255,255,0.15);
+            transition: transform 0.3s ease;
+        }
+
+        .back-btn {
+            padding: 0.75rem 2rem;
+            font-size: 0.9rem;
+        }
+        .back-btn:hover { transform: scale(1.05); }
+
+        section { padding: 12rem 0 8rem; }
+
+        .section-label {
+            font-size: 0.75rem;
+            color: #999;
+            text-transform: lowercase;
+            letter-spacing: 3px;
+            margin-bottom: 2rem;
+            font-weight: 600;
+        }
+
+        .section-title {
+            font-size: clamp(4rem, 10vw, 8rem);
+            font-weight: 900;
+            line-height: 0.9;
+            letter-spacing: -0.03em;
+            margin-bottom: 2rem;
+            text-transform: lowercase;
+        }
+
+        .section-intro { margin-bottom: 3.5rem; }
+
+        .section-intro h3 {
+            font-size: 2.25rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            text-transform: lowercase;
+            letter-spacing: -0.02em;
+        }
+
+        .section-intro p {
+            font-size: 1.1rem;
+            color: #666;
+            line-height: 1.6;
+            max-width: 560px;
+        }
+
+        /* Form Card */
+        .form-card {
+            background: #f7f7f7;
+            border-radius: 24px;
+            padding: 3rem;
+            margin-bottom: 1.75rem;
+        }
+
+        .contact-form {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+        }
+
+        .form-group { display: flex; flex-direction: column; }
+
+        .form-group label {
+            font-size: 0.7rem;
+            color: #999;
+            text-transform: lowercase;
+            letter-spacing: 2px;
+            margin-bottom: 0.75rem;
+            font-weight: 600;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            background: transparent;
+            border: none;
+            border-bottom: 1px solid rgba(0,0,0,0.2);
+            padding: 0.75rem 0;
+            color: #000;
+            font-size: 1rem;
+            font-family: inherit;
+            transition: border-color 0.3s;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-bottom-color: #000;
+        }
+
+        .form-group textarea { resize: none; min-height: 120px; }
+
+        .submit-btn {
+            padding: 1.1rem 3rem;
+            font-size: 0.95rem;
+            font-weight: 700;
+            align-self: flex-start;
+        }
+        .submit-btn:hover { transform: scale(1.04); }
+
+        /* Social line */
+        .social-line {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            flex-wrap: wrap;
+        }
+
+        .social-line .label {
+            font-size: 1rem;
+            color: #999;
+        }
+
+        .social-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.45rem;
+            color: #000;
+            text-decoration: none;
+            font-size: 1rem;
+            font-weight: 600;
+            transition: color 0.2s;
+        }
+
+        .social-link:hover { color: #555; }
+
+        .social-link svg {
+            width: 18px;
+            height: 18px;
+            flex-shrink: 0;
+        }
+
+        .social-line .divider {
+            color: #ddd;
+            font-size: 1.1rem;
+        }
+
+        /* Footer */
+        footer {
+            padding: 4rem 0 3rem;
+            border-top: 1px solid rgba(0,0,0,0.1);
+        }
+
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .footer-title {
+            font-size: clamp(1.75rem, 3vw, 2.5rem);
+            font-weight: 900;
+            line-height: 1;
+            text-transform: lowercase;
+            letter-spacing: -0.03em;
+        }
+
+        .footer-text { color: #999; font-size: 0.9rem; }
+
+        /* Scroll-animated phone container */
+        .scroll-section {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 12rem 1.25rem 4rem;
+            position: relative;
+        }
+
+        .scroll-stage {
+            width: 100%;
+            max-width: 80rem;
+            margin: 0 auto;
+            perspective: 1200px;
+            padding: 2.5rem 0;
+        }
+
+        .scroll-header {
+            max-width: 64rem;
+            margin: 0 auto;
+            text-align: center;
+            will-change: transform;
+        }
+
+        .scroll-header .section-label { margin-bottom: 1rem; }
+        .scroll-header .section-title { margin-bottom: 1.25rem; }
+        .scroll-header .section-intro { margin-bottom: 0; }
+        .scroll-header .section-intro p { margin-left: auto; margin-right: auto; }
+
+        .phone-card {
+            max-width: 64rem;
+            margin: 0 auto;
+            width: 100%;
+            border: 4px solid #6C6C6C;
+            background: #222;
+            border-radius: 30px;
+            padding: 1.5rem;
+            will-change: transform;
+            transform-style: preserve-3d;
+            transform-origin: center top;
+        }
+
+        .phone-screen {
+            width: 100%;
+            background: #18181b;
+            border-radius: 16px;
+            padding: 2.5rem;
+            color: #fff;
+        }
+
+        .phone-screen .form-card {
+            background: transparent;
+            padding: 0;
+            margin: 0;
+        }
+
+        .phone-screen .form-group label { color: #888; }
+        .phone-screen .form-group input,
+        .phone-screen .form-group textarea {
+            color: #fff;
+            border-bottom-color: rgba(255,255,255,0.2);
+        }
+        .phone-screen .form-group input:focus,
+        .phone-screen .form-group textarea:focus {
+            border-bottom-color: #fff;
+        }
+
+        .phone-screen .submit-btn { background: #fff; color: #000; }
+        .phone-screen .submit-btn:hover { background: #ddd; }
+
+        .scroll-section .social-line {
+            max-width: 64rem;
+            margin: 3rem auto 0;
+            justify-content: center;
+        }
+
+        @media (max-width: 768px) {
+            .container { padding: 0 1.5rem; }
+            section { padding: 8rem 0 4rem; }
+            .form-row { grid-template-columns: 1fr; gap: 1.5rem; }
+            .form-card { padding: 2rem 1.5rem; }
+            .footer-content { flex-direction: column; gap: 1.5rem; text-align: center; }
+            .scroll-section { padding: 8rem 0.75rem 3rem; }
+            .scroll-stage { padding: 1rem 0; }
+            .phone-card { padding: 0.6rem; border-radius: 24px; margin-top: 1rem; }
+            .phone-screen { padding: 1.5rem; border-radius: 14px; }
+            .scroll-header .section-intro p { font-size: 0.95rem; }
+        }
+
+        @media (max-width: 520px) {
+            .back-btn { padding: 0.6rem 1rem; font-size: 0.78rem; letter-spacing: 0.5px; }
+            nav { padding: 1rem 0; }
+            .logo img { height: 36px; }
+            .phone-screen { padding: 1.1rem; }
+            .form-group input,
+            .form-group textarea { font-size: 16px; }
+            .submit-btn { padding: 0.95rem 2rem; font-size: 0.85rem; }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="container">
+            <a href="index.html" class="logo">
+                <img src="images/NK Black Logo (No BG).png" alt="NK">
+            </a>
+            <a href="index.html" class="back-btn">← back home</a>
+        </div>
+    </nav>
+
+    <section class="scroll-section" id="scroll-section">
+        <div class="scroll-stage">
+            <div class="scroll-header" id="scroll-header">
+                <div class="section-label">get in touch</div>
+                <h1 class="section-title">contact</h1>
+                <div class="section-intro">
+                    <h3>let's create together</h3>
+                    <p>i'm always excited to collaborate on new projects and tell compelling stories. let's connect and create something amazing together!</p>
+                </div>
+            </div>
+
+            <div class="phone-card" id="phone-card">
+                <div class="phone-screen">
+                    <div class="form-card">
+                        <form class="contact-form" action="https://formsubmit.co/nicolask.photographs@gmail.com" method="POST">
+                            <input type="hidden" name="_subject" value="New portfolio contact">
+                            <input type="hidden" name="_captcha" value="false">
+
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="name">your name</label>
+                                    <input type="text" id="name" name="name" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="email">your email</label>
+                                    <input type="email" id="email" name="email" required>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="message">message</label>
+                                <textarea id="message" name="message" required></textarea>
+                            </div>
+
+                            <button type="submit" class="submit-btn">send message →</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <div class="social-line">
+                <span class="label">find me on</span>
+
+                <!-- Instagram -->
+                <a href="https://instagram.com/nico3o.jpg" target="_blank" class="social-link">
+                    <svg viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+                    </svg>
+                    instagram
+                </a>
+
+                <span class="divider">·</span>
+
+                <!-- LinkedIn -->
+                <a href="https://www.linkedin.com/in/nicolaskwek" target="_blank" class="social-link">
+                    <svg viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+                    </svg>
+                    linkedin
+                </a>
+
+                <span class="divider">·</span>
+
+                <!-- Email -->
+                <a href="mailto:nicolask.photographs@gmail.com" class="social-link">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg">
+                        <rect x="2" y="4" width="20" height="16" rx="2"/>
+                        <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/>
+                    </svg>
+                    email
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-title">always creating.</div>
+                <div class="footer-text">&copy; 2024 Nicolas Kwek · Singapore 🇸🇬</div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        (() => {
+            const section = document.getElementById('scroll-section');
+            const header = document.getElementById('scroll-header');
+            const card = document.getElementById('phone-card');
+            const isMobile = () => window.innerWidth <= 768;
+
+            const lerp = (a, b, t) => a + (b - a) * t;
+            const clamp = (v, min, max) => Math.max(min, Math.min(max, v));
+
+            function update() {
+                const cardRect = card.getBoundingClientRect();
+                const vh = window.innerHeight;
+                // 0 when card's top hits viewport bottom, 1 when card's top hits viewport top
+                // finishes flat just before the card enters the viewport
+                const p = clamp((vh * 1.5 - cardRect.top) / (vh * 0.6), 0, 1);
+
+                const rotate = lerp(20, 0, p);
+                const scale = isMobile()
+                    ? lerp(0.85, 1, p)
+                    : lerp(1.05, 1, p);
+                const translate = lerp(0, -60, p);
+
+                header.style.transform = `translateY(${translate}px)`;
+                card.style.transform = `rotateX(${rotate}deg) scale(${scale})`;
+            }
+
+            update();
+            window.addEventListener('scroll', update, { passive: true });
+            window.addEventListener('resize', update);
+        })();
+    </script>
+    <svg style="position:absolute;width:0;height:0;overflow:hidden" aria-hidden="true">
+        <defs>
+            <filter id="liquid-glass" x="0%" y="0%" width="100%" height="100%" color-interpolation-filters="sRGB">
+                <feTurbulence type="fractalNoise" baseFrequency="0.05 0.05" numOctaves="1" seed="1" result="turbulence"/>
+                <feGaussianBlur in="turbulence" stdDeviation="2" result="blurredNoise"/>
+                <feDisplacementMap in="SourceGraphic" in2="blurredNoise" scale="70" xChannelSelector="R" yChannelSelector="B" result="displaced"/>
+                <feGaussianBlur in="displaced" stdDeviation="4" result="finalBlur"/>
+                <feComposite in="finalBlur" in2="finalBlur" operator="over"/>
+            </filter>
+        </defs>
+    </svg>
+</body>
+</html>

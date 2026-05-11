@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About - Nicolas Kwek</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, sans-serif;
+            background: #fff;
+            color: #000;
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1600px;
+            margin: 0 auto;
+            padding: 0 4rem;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            z-index: 1000;
+            padding: 1.5rem 0;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+        }
+
+        nav .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo img {
+            height: 50px;
+            transition: transform 0.3s;
+        }
+
+        .logo:hover img {
+            transform: scale(1.05);
+        }
+
+        .back-btn {
+            position: relative;
+            padding: 0.75rem 2rem;
+            background: rgba(255,255,255,0.05);
+            color: #000;
+            text-decoration: none;
+            font-family: inherit;
+            font-size: 0.9rem;
+            font-weight: 600;
+            text-transform: lowercase;
+            letter-spacing: 1px;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            backdrop-filter: blur(6px) url(#liquid-glass);
+            -webkit-backdrop-filter: blur(6px);
+            box-shadow:
+                0 0 6px rgba(0,0,0,0.03),
+                0 2px 6px rgba(0,0,0,0.08),
+                inset 3px 3px 0.5px -3px rgba(0,0,0,0.9),
+                inset -3px -3px 0.5px -3px rgba(0,0,0,0.85),
+                inset 1px 1px 1px -0.5px rgba(0,0,0,0.6),
+                inset -1px -1px 1px -0.5px rgba(0,0,0,0.6),
+                inset 0 0 6px 6px rgba(0,0,0,0.12),
+                inset 0 0 2px 2px rgba(0,0,0,0.06),
+                0 0 12px rgba(255,255,255,0.15);
+            transition: transform 0.3s ease;
+        }
+        .back-btn:hover { transform: scale(1.05); }
+
+        /* Main Content */
+        section {
+            padding: 12rem 0 8rem;
+        }
+
+        .section-label {
+            font-size: 0.75rem;
+            color: #999;
+            text-transform: lowercase;
+            letter-spacing: 3px;
+            margin-bottom: 2rem;
+            font-weight: 600;
+            text-align: center;
+        }
+
+        .section-title {
+            font-size: clamp(4rem, 10vw, 8rem);
+            font-weight: 900;
+            line-height: 0.9;
+            letter-spacing: -0.03em;
+            margin-bottom: 5rem;
+            text-transform: lowercase;
+            text-align: center;
+        }
+
+        /* Side-by-side About Section */
+        .about-content {
+            display: flex;
+            align-items: center;
+            gap: 4rem;
+        }
+
+        .about-image {
+            flex-shrink: 0;
+            width: 400px;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .about-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            transition: transform 0.6s;
+        }
+
+        .about-image:hover img {
+            transform: scale(1.02);
+        }
+
+        .about-text {
+            flex: 1;
+            max-width: 800px;
+        }
+
+        .about-text p {
+            font-size: 1.25rem;
+            line-height: 1.8;
+            color: #333;
+            margin-bottom: 2rem;
+        }
+
+        /* Footer */
+        footer {
+            padding: 4rem 0 3rem;
+            border-top: 1px solid rgba(0,0,0,0.1);
+        }
+
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .footer-title {
+            font-size: clamp(1.75rem, 3vw, 2.5rem);
+            font-weight: 900;
+            line-height: 1;
+            text-transform: lowercase;
+            letter-spacing: -0.03em;
+        }
+
+        .footer-text { color: #999; font-size: 0.9rem; }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .about-content {
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+            }
+
+            .footer-content {
+                flex-direction: column;
+                gap: 1.5rem;
+                text-align: center;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .container { padding: 0 1.5rem; }
+            section { padding: 8rem 0 4rem; }
+            .about-text p { font-size: 1.1rem; }
+        }
+
+        @media (max-width: 520px) {
+            .container { padding: 0 1.5rem; }
+            .back-btn { padding: 0.6rem 1rem; font-size: 0.78rem; letter-spacing: 0.5px; }
+            nav { padding: 1rem 0; }
+            .logo img { height: 36px; }
+            .about-text p { font-size: 1rem; }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="container">
+            <a href="index.html" class="logo">
+                <img src="images/NK Black Logo (No BG).png" alt="NK">
+            </a>
+            <a href="index.html" class="back-btn">← back home</a>
+        </div>
+    </nav>
+
+    <section>
+        <div class="container">
+            <div class="section-label">who i am</div>
+            <h1 class="section-title">about</h1>
+            
+            <div class="about-content">
+                <div class="about-image">
+                    <img src="images/aboutme.jpg" alt="Nicolas Kwek">
+                </div>
+
+                <div class="about-text">
+                    <p>Hello, I am Nicolas! I am an 18-year-old, self-taught photographer and graphic designer currently studying a Diploma in Media, Arts & Design (Story & Content Creation) at Singapore Polytechnic.</p>
+
+                    <p>What initially started out as a small hobby eventually turned into one of my favorite pastimes, and I have developed a strong passion for capturing small moments and telling stories through photos.</p>
+
+                    <p>I have worked on documentaries and short films, and taken on clients as a freelance photographer. I have always enjoyed looking at photos, and am especially happy when a nice photo of me with my friends is taken. Through my lens, I aim to deliver that same happiness to whoever I take photos for.</p>
+
+                    <p>I am always open to new experiences and challenges, so if you are looking for an enthusiastic, friendly photographer, do get in touch and let's work together!</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-title">always creating.</div>
+                <div class="footer-text">&copy; 2024 Nicolas Kwek · Singapore 🇸🇬</div>
+            </div>
+        </div>
+    </footer>
+    <svg style="position:absolute;width:0;height:0;overflow:hidden" aria-hidden="true">
+        <defs>
+            <filter id="liquid-glass" x="0%" y="0%" width="100%" height="100%" color-interpolation-filters="sRGB">
+                <feTurbulence type="fractalNoise" baseFrequency="0.05 0.05" numOctaves="1" seed="1" result="turbulence"/>
+                <feGaussianBlur in="turbulence" stdDeviation="2" result="blurredNoise"/>
+                <feDisplacementMap in="SourceGraphic" in2="blurredNoise" scale="70" xChannelSelector="R" yChannelSelector="B" result="displaced"/>
+                <feGaussianBlur in="displaced" stdDeviation="4" result="finalBlur"/>
+                <feComposite in="finalBlur" in2="finalBlur" operator="over"/>
+            </filter>
+        </defs>
+    </svg>
+</body>
+</html>
