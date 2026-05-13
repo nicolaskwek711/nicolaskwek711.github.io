@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Writing — Nicolas Kwek</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: 'Inter', -apple-system, sans-serif;
+            background: #fff;
+            color: #000;
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 4rem;
+        }
+
+        nav .container,
+        footer .container { max-width: 1600px; }
+
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(255,255,255,0.95);
+            backdrop-filter: blur(20px);
+            z-index: 1000;
+            padding: 1.5rem 0;
+            border-bottom: 1px solid rgba(0,0,0,0.1);
+        }
+
+        nav .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo img { height: 50px; transition: transform 0.3s; }
+        .logo:hover img { transform: scale(1.05); }
+
+        .nav-actions { display: flex; gap: 0.75rem; align-items: center; }
+
+        .back-btn {
+            position: relative;
+            padding: 0.75rem 1.6rem;
+            background: rgba(255,255,255,0.05);
+            color: #000;
+            text-decoration: none;
+            font-family: inherit;
+            font-size: 0.9rem;
+            font-weight: 600;
+            text-transform: lowercase;
+            letter-spacing: 1px;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            backdrop-filter: blur(6px) url(#liquid-glass);
+            -webkit-backdrop-filter: blur(6px);
+            box-shadow:
+                0 0 6px rgba(0,0,0,0.03),
+                0 2px 6px rgba(0,0,0,0.08),
+                inset 3px 3px 0.5px -3px rgba(0,0,0,0.9),
+                inset -3px -3px 0.5px -3px rgba(0,0,0,0.85),
+                inset 1px 1px 1px -0.5px rgba(0,0,0,0.6),
+                inset -1px -1px 1px -0.5px rgba(0,0,0,0.6),
+                inset 0 0 6px 6px rgba(0,0,0,0.12),
+                inset 0 0 2px 2px rgba(0,0,0,0.06),
+                0 0 12px rgba(255,255,255,0.15);
+            transition: transform 0.3s ease;
+        }
+        .back-btn:hover { transform: scale(1.05); }
+
+        .hero {
+            padding: 10rem 0 3rem;
+        }
+
+        .section-label {
+            font-size: 0.75rem;
+            color: #999;
+            text-transform: lowercase;
+            letter-spacing: 3px;
+            margin-bottom: 1.5rem;
+            font-weight: 600;
+        }
+
+        .section-title {
+            font-size: clamp(4rem, 11vw, 9rem);
+            font-weight: 900;
+            line-height: 0.9;
+            letter-spacing: -0.03em;
+            margin-bottom: 1.5rem;
+            text-transform: lowercase;
+        }
+
+        .section-desc {
+            font-size: 1.1rem;
+            color: #666;
+            max-width: 560px;
+        }
+
+        .pieces {
+            padding-bottom: 6rem;
+        }
+
+        .piece {
+            padding: 4rem 0;
+            border-top: 1px solid rgba(0,0,0,0.1);
+        }
+        .piece:first-child { border-top: none; padding-top: 0; }
+
+        .piece-header {
+            display: flex;
+            align-items: baseline;
+            gap: 1rem;
+            margin-bottom: 0.75rem;
+            flex-wrap: wrap;
+        }
+
+        .piece-number {
+            font-size: 0.85rem;
+            color: #999;
+            font-weight: 600;
+            letter-spacing: 2px;
+        }
+
+        .piece-type {
+            font-size: 0.75rem;
+            color: #999;
+            text-transform: lowercase;
+            letter-spacing: 2px;
+            font-weight: 600;
+            padding: 0.3rem 0.8rem;
+            border: 1px solid rgba(0,0,0,0.15);
+            border-radius: 50px;
+            margin-left: auto;
+        }
+
+        .piece-title {
+            font-size: clamp(2.25rem, 5vw, 3.75rem);
+            font-weight: 900;
+            line-height: 1;
+            letter-spacing: -0.03em;
+            margin-bottom: 1rem;
+            text-transform: lowercase;
+        }
+
+        .piece-tagline {
+            font-size: 1rem;
+            color: #888;
+            margin-bottom: 2rem;
+            font-style: italic;
+        }
+
+        .piece-pdf {
+            width: 100%;
+            height: 720px;
+            border-radius: 12px;
+            overflow: hidden;
+            border: 1px solid rgba(0,0,0,0.1);
+            margin-bottom: 2rem;
+            background: #f5f5f5;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.06);
+        }
+
+        .piece-pdf iframe {
+            width: 100%;
+            height: 100%;
+            display: block;
+            border: none;
+        }
+
+        .piece-body {
+            display: grid;
+            grid-template-columns: 1fr auto;
+            gap: 3rem;
+            align-items: start;
+        }
+
+        .synopsis-label {
+            font-size: 0.7rem;
+            color: #999;
+            text-transform: lowercase;
+            letter-spacing: 2px;
+            font-weight: 600;
+            margin-bottom: 0.75rem;
+        }
+
+        .synopsis-text {
+            font-size: 1.05rem;
+            color: #333;
+            line-height: 1.7;
+        }
+
+        .read-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.85rem 1.75rem;
+            background: #000;
+            color: #fff;
+            text-decoration: none;
+            font-family: inherit;
+            font-size: 0.85rem;
+            font-weight: 600;
+            text-transform: lowercase;
+            letter-spacing: 1px;
+            border-radius: 50px;
+            white-space: nowrap;
+            flex-shrink: 0;
+            transition: transform 0.2s ease;
+        }
+        .read-btn:hover { transform: scale(1.05); }
+
+        footer {
+            padding: 4rem 0 3rem;
+            border-top: 1px solid rgba(0,0,0,0.1);
+        }
+
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .footer-title {
+            font-size: clamp(1.75rem, 3vw, 2.5rem);
+            font-weight: 900;
+            line-height: 1;
+            text-transform: lowercase;
+            letter-spacing: -0.03em;
+        }
+
+        .footer-text { color: #999; font-size: 0.9rem; }
+
+        @media (max-width: 520px) {
+            .nav-actions { gap: 0.4rem; }
+            .back-btn { padding: 0.6rem 1rem; font-size: 0.78rem; letter-spacing: 0.5px; }
+            nav { padding: 1rem 0; }
+            .logo img { height: 36px; }
+            .piece-header { gap: 0.5rem; }
+            .piece-type { margin-left: 0; }
+        }
+
+        @media (max-width: 768px) {
+            .container { padding: 0 1.5rem; }
+            .hero { padding: 7rem 0 2rem; }
+            .piece { padding: 3rem 0; }
+            .piece-pdf { height: 480px; }
+            .piece-body { grid-template-columns: 1fr; gap: 1.5rem; }
+            .piece-type { margin-left: 0; }
+            .footer-content { flex-direction: column; gap: 1.5rem; text-align: center; }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="container">
+            <a href="index.html" class="logo">
+                <img src="images/NK Black Logo (No BG).png" alt="NK">
+            </a>
+            <div class="nav-actions">
+                <a href="portfolio.html" class="back-btn">← portfolio</a>
+                <a href="index.html" class="back-btn">← home</a>
+            </div>
+        </div>
+    </nav>
+
+    <section class="hero">
+        <div class="container">
+            <div class="section-label">selected work</div>
+            <h1 class="section-title">writing</h1>
+            <p class="section-desc">three articles across feature writing and profiles — spanning music, subculture and fashion, each earning a distinction.</p>
+        </div>
+    </section>
+
+    <div class="container">
+        <div class="pieces">
+
+            <!-- Grooves of Time -->
+            <article class="piece">
+                <div class="piece-header">
+                    <span class="piece-number">01</span>
+                    <span class="piece-type">photo essay · music</span>
+                </div>
+                <h2 class="piece-title">grooves of time</h2>
+                <p class="piece-tagline">a photo essay written for my Fundamentals of Journalism module — graded A.</p>
+
+                <div class="piece-pdf">
+                    <iframe src="images/Writing/Grooves%20of%20Time.pdf" title="Grooves of Time"></iframe>
+                </div>
+
+                <div class="piece-body">
+                    <div class="synopsis-block">
+                        <div class="synopsis-label">about</div>
+                        <p class="synopsis-text">Vinyl records were supposed to be a relic of the past — but somehow, they're back. This feature traces the retro revival sweeping through music culture, exploring why a generation that grew up with streaming is falling in love with the crackle and warmth of the turntable.</p>
+                    </div>
+                    <a href="images/Writing/Grooves%20of%20Time.pdf" class="read-btn" target="_blank">open article ↗</a>
+                </div>
+            </article>
+
+            <!-- Ant-ventures -->
+            <article class="piece">
+                <div class="piece-header">
+                    <span class="piece-number">02</span>
+                    <span class="piece-type">profile · lifestyle</span>
+                </div>
+                <h2 class="piece-title">ant-ventures</h2>
+                <p class="piece-tagline">a profile written for my The Digital Journalist module — graded A.</p>
+
+                <div class="piece-pdf">
+                    <iframe src="images/Writing/Ant-ventures-1.pdf" title="Ant-ventures"></iframe>
+                </div>
+
+                <div class="piece-body">
+                    <div class="synopsis-block">
+                        <div class="synopsis-label">about</div>
+                        <p class="synopsis-text">Most people step on ants. One student has made it his mission to find, study, and photograph them. This profile follows a young hobbyist whose passion for ant-spotting has taken him to parks, pavements, and places most would overlook — revealing a hidden world teeming with life beneath our feet.</p>
+                    </div>
+                    <a href="images/Writing/Ant-ventures-1.pdf" class="read-btn" target="_blank">open article ↗</a>
+                </div>
+            </article>
+
+            <!-- From Stadium to Street -->
+            <article class="piece">
+                <div class="piece-header">
+                    <span class="piece-number">03</span>
+                    <span class="piece-type">feature · fashion</span>
+                </div>
+                <h2 class="piece-title">from stadium to street</h2>
+                <p class="piece-tagline">a feature article written for my The Digital Journalist module — graded A.</p>
+
+                <div class="piece-pdf">
+                    <iframe src="images/Writing/From%20Stadium%20to%20Street.pdf" title="From Stadium to Street"></iframe>
+                </div>
+
+                <div class="piece-body">
+                    <div class="synopsis-block">
+                        <div class="synopsis-label">about</div>
+                        <p class="synopsis-text">Once confined to the pitch, football jerseys have broken out of the stadium and onto the streets. This feature charts the evolution of football fashion — from functional sportswear worn only by players to coveted streetwear pieces styled by fans, designers, and culture-shapers the world over.</p>
+                    </div>
+                    <a href="images/Writing/From%20Stadium%20to%20Street.pdf" class="read-btn" target="_blank">open article ↗</a>
+                </div>
+            </article>
+
+        </div>
+    </div>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-title">always creating.</div>
+                <div class="footer-text">&copy; 2024 Nicolas Kwek · Singapore 🇸🇬</div>
+            </div>
+        </div>
+    </footer>
+
+    <svg style="position:absolute;width:0;height:0;overflow:hidden" aria-hidden="true">
+        <defs>
+            <filter id="liquid-glass" x="0%" y="0%" width="100%" height="100%" color-interpolation-filters="sRGB">
+                <feTurbulence type="fractalNoise" baseFrequency="0.05 0.05" numOctaves="1" seed="1" result="turbulence"/>
+                <feGaussianBlur in="turbulence" stdDeviation="2" result="blurredNoise"/>
+                <feDisplacementMap in="SourceGraphic" in2="blurredNoise" scale="70" xChannelSelector="R" yChannelSelector="B" result="displaced"/>
+                <feGaussianBlur in="displaced" stdDeviation="4" result="finalBlur"/>
+                <feComposite in="finalBlur" in2="finalBlur" operator="over"/>
+            </filter>
+        </defs>
+    </svg>
+</body>
+</html>
